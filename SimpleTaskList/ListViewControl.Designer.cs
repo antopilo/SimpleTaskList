@@ -39,6 +39,7 @@
             this.taskList.Name = "taskList";
             this.taskList.Size = new System.Drawing.Size(325, 346);
             this.taskList.TabIndex = 1;
+            this.taskList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.taskList_ItemCheck);
             // 
             // ListViewControl
             // 

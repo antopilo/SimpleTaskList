@@ -11,3 +11,16 @@ F:\Desktop\SimpleTaskList\SimpleTaskList\SimpleTaskList\obj\Debug\SimpleTaskList
 F:\Desktop\SimpleTaskList\SimpleTaskList\SimpleTaskList\obj\Debug\SimpleTaskList.exe
 F:\Desktop\SimpleTaskList\SimpleTaskList\SimpleTaskList\obj\Debug\SimpleTaskList.pdb
 F:\Desktop\SimpleTaskList\SimpleTaskList\SimpleTaskList\obj\Debug\SimpleTaskList.ListViewControl.resources
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\bin\Debug\SimpleTaskList.exe.config
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\bin\Debug\SimpleTaskList.exe
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\bin\Debug\SimpleTaskList.pdb
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\bin\Debug\MaterialSkin.dll
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Debug\SimpleTaskList.csprojAssemblyReference.cache
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Debug\SimpleTaskList.ListViewControl.resources
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Debug\SimpleTaskList.Properties.Resources.resources
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Debug\SimpleTaskList.SimpleTaskList.resources
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Debug\SimpleTaskList.csproj.GenerateResource.cache
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Debug\SimpleTaskList.csproj.CoreCompileInputs.cache
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Debug\SimpleTaskList.csproj.CopyComplete
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Debug\SimpleTaskList.exe
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Debug\SimpleTaskList.pdb

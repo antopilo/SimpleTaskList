@@ -33,6 +33,10 @@ namespace SimpleTaskList
             }
         }
 
-
+        private void taskList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            bool isChecked = e.NewValue == CheckState.Checked ? true : false;
+            TaskList.Tasks[e.Index].Checked = isChecked;
+        }
     }
 }

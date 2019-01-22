@@ -14,7 +14,8 @@ namespace SimpleTaskList
     public partial class SimpleTaskList : MaterialForm
     {
         TaskList CurrentList;
-        string SavePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory) + "newList.xml";
+        string SavePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory) + "default.xml";
+        string SavePathDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory);
 
         public SimpleTaskList()
         {
@@ -25,56 +26,64 @@ namespace SimpleTaskList
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
-            this.DoubleBuffered = true;
-            LoadFile(SavePath);
+
+            LoadOpened();
         }
 
-        // add new task,
-        private void materialRaisedButton1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Search for the ListViewControl inside a the current tab.
+        /// </summary>
+        /// <returns></returns>
+        private ListViewControl GetListControl()
         {
-            if (CurrentList == null) newList();
-            var taskName = txtNewTask.Text;
-            if (taskName == "")
-                return;
-
-            TaskItem newItem = new TaskItem(taskName);
-            CurrentList.AddItem(newItem);
-
-            bool isChecked = newItem.Checked;
-            GetListControl().ListBox.Items.Add(newItem.TaskName);
-
+            foreach (var controls in TabControler.SelectedTab.Controls)
+            {
+                if (controls is ListViewControl)
+                    return controls as ListViewControl;
+            }
+            throw new Exception("The control doesnt have a ListViewControl.");
         }
 
-        // Load file.
+        private void newList()
+        {
+            // Loading file.
+            CurrentList = new TaskList("new List");
+
+            // Adding tab.
+            TabPage newTab = new TabPage("new List");
+            newTab.Controls.Add(new ListViewControl(CurrentList)
+            {
+                Dock = DockStyle.Fill
+            });
+
+            TabControler.TabPages.Add(newTab);
+            TabControler.SelectedTab = newTab;
+        }
+
+        #region Loading
         private void LoadFile(string pPath)
         {
             // Loading file.
-            if(!Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory) + "newList.xml"))
-            {
+            if(!File.Exists(SavePath) )
                 newList();
-            }
-                
+
             CurrentList = Helper.Serialization.Deserialize<TaskList>(pPath);
 
             // Adding tab.
             string Name = pPath.Split('\\')[pPath.Split('\\').Length - 1].Split('.')[0];
             TabPage newTab = new TabPage(Name);
-            newTab.Controls.Add(new ListViewControl(CurrentList) {
+            newTab.Controls.Add(new ListViewControl(CurrentList)
+            {
                 Dock = DockStyle.Fill
             });
 
             TabControler.TabPages.Add(newTab);
             TabControler.SelectedTab = newTab;
 
-            int idx = 0;
-            foreach (TaskItem item in CurrentList.Tasks)
-            {
-                bool isChecked = item.Checked;
-                GetListControl().ListBox.Items.Add(item.TaskName);
-                GetListControl().ListBox.SetItemChecked(idx, isChecked);
-            }
-        }
+        } 
+        #endregion
 
+        #region Saving
         private void SaveAs()
         {
             // Open dialog
@@ -103,71 +112,119 @@ namespace SimpleTaskList
                 x.Serialize(sw, CurrentList);
             }
         }
+
+        private void SaveAsList(TaskList pList)
+        {
+            // Open dialog
+
+            var fileContent = string.Empty;
+            var filePath = string.Empty;
+
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory);
+                saveFileDialog.Filter = "XML files(*.xml) | *.xml";
+                saveFileDialog.FilterIndex = 0;
+                saveFileDialog.RestoreDirectory = true;
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    filePath = saveFileDialog.FileName;
+                }
+                else return;
+            }
+
+            XmlSerializer x = new XmlSerializer(pList.GetType());
+            using (var sw = new StreamWriter(filePath))
+            {
+                pList.Name = filePath.Split('\\')[filePath.Split('\\').Length - 1].Split('.')[0];
+                x.Serialize(sw, pList);
+            }
+        }
+
         private void SaveAll()
         {
-            if (TabControler.SelectedTab == null) return;
+            if (TabControler.SelectedTab == null)
+                return;
 
             foreach (var controls in TabControler.SelectedTab.Controls)
             {
-                if (controls is ListViewControl)
+                if ((controls as ListViewControl).TaskList.Name == "new List")
+                {
+                    SaveAsList((controls as ListViewControl).TaskList);
+                    return;
+                }
+                else if (controls is ListViewControl)
                 {
                     XmlSerializer x = new XmlSerializer(CurrentList.GetType());
-                    using (var sw = new StreamWriter(SavePath))
+                    using (var sw = new StreamWriter(SavePathDir + (controls as ListViewControl).TaskList.Name + ".xml"))
                     {
                         x.Serialize(sw, (controls as ListViewControl).TaskList);
                     }
                 }
-                    ;
             }
         }
 
-        // Saving
         private void Save()
         {
             XmlSerializer x = new XmlSerializer(CurrentList.GetType());
-            using (var sw = new StreamWriter(SavePath))
+            using (var sw = new StreamWriter(SavePathDir+CurrentList.Name + ".xml"))
             {
                 x.Serialize(sw, CurrentList);
             }
         }
 
-
-        private void SimpleTaskList_FormClosing(Object sender, FormClosingEventArgs e)
+        private void SavedOpened()
         {
-            SaveAll();
+            StreamWriter sw = new StreamWriter(SavePathDir + "opened.txt");
+
+            if(TabControler.TabPages.Count < 1)
+            {
+                sw.Close();
+                return;
+            }
+            foreach (TabPage tabs in TabControler.TabPages)
+            { 
+                sw.WriteLine(tabs.Text);
+            }
+
+            sw.Close();
+        }
+        private void LoadOpened()
+        {
+            StreamReader sr = new StreamReader(SavePathDir + "opened.txt");
+            while (!sr.EndOfStream)
+            {
+                var name = sr.ReadLine();
+                if (name == "")
+                {
+                    sr.Close();
+                    return;
+                }
+                   
+                LoadFile(SavePathDir + name + ".xml");
+            }
+            sr.Close();
         }
 
+        #endregion
 
-        private void btnRemove_Click_1(object sender, EventArgs e)
+        #region Events
+        private void materialRaisedButton1_Click(object sender, EventArgs e)
         {
-            if (GetListControl().ListBox.SelectedItem == null)
+            if (CurrentList == null) newList();
+            var taskName = txtNewTask.Text;
+            if (taskName == "")
                 return;
 
-            GetListControl().ListBox.Items.Remove(GetListControl().ListBox.SelectedItem);
+            TaskItem newItem = new TaskItem(taskName);
+            CurrentList.AddItem(newItem);
+
+            bool isChecked = newItem.Checked;
+            GetListControl().ListBox.Items.Add(newItem.TaskName);
+
         }
-
-
-        /// <summary>
-        /// Search for the ListViewControl inside a the current tab.
-        /// </summary>
-        /// <returns></returns>
-        private ListViewControl GetListControl()
-        {
-            foreach (var controls in TabControler.SelectedTab.Controls)
-            {
-                if (controls is ListViewControl)
-                    return controls as ListViewControl;
-            }
-            throw new Exception("The control doesnt have a ListViewControl.");
-        }
-
-
-        private void taskList_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            bool isChecked = e.NewValue == CheckState.Checked ? true : false;
-            CurrentList.Tasks[e.Index].Checked = isChecked;
-        }
-
 
         private void btnOpenList_Click(object sender, EventArgs e)
         {
@@ -191,31 +248,28 @@ namespace SimpleTaskList
             }
         }
 
+        private void SimpleTaskList_FormClosing(Object sender, FormClosingEventArgs e)
+        {
+            SaveAll();
+            SavedOpened();
+        }
+
+        private void btnRemove_Click_1(object sender, EventArgs e)
+        {
+            if (GetListControl().ListBox.SelectedItem == null)
+                return;
+
+            GetListControl().TaskList.Tasks.RemoveAt(GetListControl().ListBox.SelectedIndex);
+            GetListControl().ListBox.Items.Remove(GetListControl().ListBox.SelectedItem);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             Save();
             TabControler.TabPages.Remove(TabControler.SelectedTab);
         }
 
-
-        private void newList()
-        {
-            // Loading file.
-            CurrentList = new TaskList("new List");
-
-            // Adding tab.
-            TabPage newTab = new TabPage("new List");
-            newTab.Controls.Add(new ListViewControl(CurrentList)
-            {
-                Dock = DockStyle.Fill
-            });
-
-            TabControler.TabPages.Add(newTab);
-            TabControler.SelectedTab = newTab;
-
-        }
-        private void btnNewList_Click(object sender, EventArgs e)
-            => newList();
+        private void btnNewList_Click(object sender, EventArgs e) => newList();
 
         private void TabControler_TabIndexChanged(object sender, EventArgs e)
         {
@@ -225,7 +279,8 @@ namespace SimpleTaskList
         private void btnSaveAs_Click(object sender, EventArgs e)
         {
             SaveAs();
-        }
-    }
+        } 
+        #endregion
 
+    }
 }

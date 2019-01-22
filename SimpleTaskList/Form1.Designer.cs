@@ -72,7 +72,6 @@ namespace SimpleTaskList
             this.txtNewTask.SelectionStart = 0;
             this.txtNewTask.Size = new System.Drawing.Size(172, 23);
             this.txtNewTask.TabIndex = 2;
-            this.txtNewTask.Text = "New task...";
             this.txtNewTask.UseSystemPasswordChar = false;
             // 
             // btnRemove

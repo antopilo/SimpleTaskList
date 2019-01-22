@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TaskList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Name>test</Name>
+  <Name>default</Name>
   <Tasks>
     <TaskItem>
       <Checked>false</Checked>
-      <TaskName>trest</TaskName>
+      <TaskName>Faire le menage</TaskName>
     </TaskItem>
     <TaskItem>
-      <Checked>true</Checked>
-      <TaskName>asdasd</TaskName>
+      <Checked>false</Checked>
+      <TaskName>faire la vaiselle</TaskName>
     </TaskItem>
   </Tasks>
 </TaskList>
