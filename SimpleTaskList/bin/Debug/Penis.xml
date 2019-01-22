@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TaskList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>test</Name>
+  <Tasks>
+    <TaskItem>
+      <Checked>false</Checked>
+      <TaskName>trest</TaskName>
+    </TaskItem>
+    <TaskItem>
+      <Checked>true</Checked>
+      <TaskName>asdasd</TaskName>
+    </TaskItem>
+  </Tasks>
+</TaskList>
