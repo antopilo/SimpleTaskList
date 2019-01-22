@@ -1,0 +1,12 @@
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\bin\Release\SimpleTaskList.exe.config
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\bin\Release\SimpleTaskList.exe
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\bin\Release\SimpleTaskList.pdb
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\bin\Release\MaterialSkin.dll
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Release\SimpleTaskList.ListViewControl.resources
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Release\SimpleTaskList.Properties.Resources.resources
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Release\SimpleTaskList.SimpleTaskList.resources
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Release\SimpleTaskList.csproj.GenerateResource.cache
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Release\SimpleTaskList.csproj.CoreCompileInputs.cache
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Release\SimpleTaskList.csproj.CopyComplete
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Release\SimpleTaskList.exe
+C:\Users\Antoine\Desktop\SimpleTaskList\SimpleTaskList\obj\Release\SimpleTaskList.pdb

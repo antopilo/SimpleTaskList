@@ -111,6 +111,8 @@ namespace SimpleTaskList
             {
                 x.Serialize(sw, CurrentList);
             }
+            TabControler.TabPages.Remove(TabControler.SelectedTab);
+            LoadFile(filePath);
         }
 
         private void SaveAsList(TaskList pList)
