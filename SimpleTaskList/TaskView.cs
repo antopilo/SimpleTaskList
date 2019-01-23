@@ -64,8 +64,10 @@ namespace SimpleTaskList
         private void LoadFile(string pPath)
         {
             // Loading file.
-            if(!File.Exists(SavePath) )
-                newList();
+            if(!File.Exists(pPath))
+            {
+                return;
+            }
 
             CurrentList = Helper.Serialization.Deserialize<TaskList>(pPath);
 
@@ -86,6 +88,9 @@ namespace SimpleTaskList
         #region Saving
         private void SaveAs()
         {
+            if (CurrentList is null)
+                newList();
+
             // Open dialog
 
             var fileContent = string.Empty;
@@ -105,7 +110,8 @@ namespace SimpleTaskList
                 }
                 else return;
             }
-
+            
+            CurrentList.Name = ( filePath.Split('\\')[filePath.Split('\\').Length - 1]).Split('.')[0];
             XmlSerializer x = new XmlSerializer(CurrentList.GetType());
             using (var sw = new StreamWriter(filePath))
             {
@@ -180,14 +186,16 @@ namespace SimpleTaskList
         private void SavedOpened()
         {
             StreamWriter sw = new StreamWriter(SavePathDir + "opened.txt");
-
-            if(TabControler.TabPages.Count < 1)
+            sw.Flush();
+            if(TabControler.TabPages.Count == 0)
             {
                 sw.Close();
                 return;
             }
+           
             foreach (TabPage tabs in TabControler.TabPages)
             { 
+                
                 sw.WriteLine(tabs.Text);
             }
 
@@ -195,6 +203,9 @@ namespace SimpleTaskList
         }
         private void LoadOpened()
         {
+            if (!File.Exists(SavePathDir + "opened.txt"))
+                SavedOpened();
+
             StreamReader sr = new StreamReader(SavePathDir + "opened.txt");
             while (!sr.EndOfStream)
             {

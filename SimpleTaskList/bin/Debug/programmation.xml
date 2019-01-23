@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TaskList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>programmation</Name>
+  <Tasks>
+    <TaskItem>
+      <Checked>true</Checked>
+      <TaskName>REparer bug #22</TaskName>
+    </TaskItem>
+    <TaskItem>
+      <Checked>true</Checked>
+      <TaskName>REparer bug #22</TaskName>
+    </TaskItem>
+    <TaskItem>
+      <Checked>true</Checked>
+      <TaskName>REparer bug #22</TaskName>
+    </TaskItem>
+    <TaskItem>
+      <Checked>false</Checked>
+      <TaskName>REparer bug #22</TaskName>
+    </TaskItem>
+    <TaskItem>
+      <Checked>false</Checked>
+      <TaskName>REparer bug #22</TaskName>
+    </TaskItem>
+    <TaskItem>
+      <Checked>false</Checked>
+      <TaskName>REparer bug #22</TaskName>
+    </TaskItem>
+    <TaskItem>
+      <Checked>false</Checked>
+      <TaskName>REparer bug #22</TaskName>
+    </TaskItem>
+    <TaskItem>
+      <Checked>false</Checked>
+      <TaskName>REparer bug #22</TaskName>
+    </TaskItem>
+    <TaskItem>
+      <Checked>false</Checked>
+      <TaskName>REparer bug #22</TaskName>
+    </TaskItem>
+    <TaskItem>
+      <Checked>false</Checked>
+      <TaskName>REparer bug #22</TaskName>
+    </TaskItem>
+    <TaskItem>
+      <Checked>false</Checked>
+      <TaskName>REparer bug #22</TaskName>
+    </TaskItem>
+    <TaskItem>
+      <Checked>false</Checked>
+      <TaskName>REparer bug #22</TaskName>
+    </TaskItem>
+  </Tasks>
+</TaskList>

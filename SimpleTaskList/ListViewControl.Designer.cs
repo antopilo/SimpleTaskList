@@ -33,7 +33,11 @@
             // 
             // taskList
             // 
-            this.taskList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.taskList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.taskList.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.taskList.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.taskList.FormattingEnabled = true;
             this.taskList.Location = new System.Drawing.Point(0, 0);
             this.taskList.Name = "taskList";
